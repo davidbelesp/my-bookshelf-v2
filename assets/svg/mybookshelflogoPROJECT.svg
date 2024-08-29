@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg1"
+   inkscape:version="1.3.2 (091e20e, 2023-11-25, custom)"
+   sodipodi:docname="mybookshelflogoPROJECT.svg"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#ffffff"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="1"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="px"
+     inkscape:zoom="1.5878906"
+     inkscape:cx="336.61009"
+     inkscape:cy="255.68512"
+     inkscape:window-width="1350"
+     inkscape:window-height="1000"
+     inkscape:window-x="55"
+     inkscape:window-y="0"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="layer2" />
+  <defs
+     id="defs1">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 256 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="512 : 256 : 1"
+       inkscape:persp3d-origin="256 : 170.66667 : 1"
+       id="perspective2" />
+  </defs>
+  <g
+     inkscape:label="Capa 1"
+     inkscape:groupmode="layer"
+     id="layer1">
+    <rect
+       style="fill:#2d50a0;fill-opacity:1"
+       id="rect1"
+       width="512"
+       height="512"
+       x="0"
+       y="0" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Capa 2">
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke-width:1.04356"
+       id="rect25"
+       width="49.751537"
+       height="143"
+       x="255"
+       y="204.67404" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke-width:1.24041"
+       id="rect25-0"
+       width="70.966156"
+       height="141.63934"
+       x="361.9274"
+       y="-126.83934"
+       transform="matrix(0.70456116,0.70964327,0,1,0,0)" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke-width:1.27992"
+       id="rect25-8"
+       width="145.48552"
+       height="73.561882"
+       x="145.48552"
+       y="158.56187"
+       transform="matrix(0.8591921,0.51165315,0,1,0,0)" />
+    <rect
+       style="fill:#ffffff;fill-opacity:1;stroke-width:1.27992"
+       id="rect25-8-9"
+       width="145.48552"
+       height="73.561882"
+       x="-442.27594"
+       y="459.29187"
+       transform="matrix(-0.8591921,0.51165315,0,1,0,0)" />
+  </g>
+</svg>
