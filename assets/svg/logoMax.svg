@@ -1,0 +1,57 @@
+
+<svg
+   width="512"
+   height="512"
+   viewBox="0 0 512 512"
+   version="1.1"
+   id="svg1">
+  <g id="background" style="fill:#2d50a0">
+    <rect
+       id="rect1"
+       width="512"
+       height="512"
+       x="-4.4083643"
+       y="0" />
+  </g>
+  <g
+     id="logo"
+     fill="#ffffff">
+    <rect
+       style="stroke-width:1.71725"
+       id="rect25"
+       width="81.869621"
+       height="235.31645"
+       x="255"
+       y="196.93155" />
+    <rect
+       style="stroke-width:2.26599"
+       id="rect25-0"
+       width="129.48264"
+       height="259.06702"
+       x="362.83597"
+       y="-227.11806"
+       transform="matrix(0.70279695,0.71139051,0,1,0,0)" />
+    <rect
+       style="stroke-width:2.27532"
+       id="rect25-8-9"
+       width="258.48508"
+       height="130.84433"
+       x="-555.39362"
+       y="507.48734"
+       transform="matrix(-0.8588504,0.5122265,0,1,0,0)" />
+    <rect
+       style="stroke-width:2.27531"
+       id="rect25-8-9-9"
+       width="258.48508"
+       height="130.84433"
+       x="24.45129"
+       y="210.4754"
+       transform="matrix(0.8588504,0.5122265,0,1,0,0)" />
+    <rect
+       id="rect2"
+       width="1.8892989"
+       height="3.7785978"
+       x="180.74294"
+       y="393.60394" />
+  </g>
+</svg>
