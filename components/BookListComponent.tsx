@@ -21,7 +21,8 @@ export default function BookListComponent() {
           keyExtractor={(book) => book.uuid}
           renderItem={({ item }) => ( 
            <Book book={item}/>
-          )}>
+          )}
+          className='pt-2 pb-2'>
         </FlatList>
         <StatusBar style="dark" />
       </View>

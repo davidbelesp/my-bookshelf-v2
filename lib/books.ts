@@ -8,7 +8,7 @@ export async function getBooks() : Promise<BookModel[]> {
 
 }
 
-export async function getBook(uuid : string) {
+export async function getBook(uuid : string) : Promise<BookModel | undefined> {
 
     const books = await getBooks();
     return books.find(book => book.uuid === uuid);

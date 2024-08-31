@@ -1,7 +1,7 @@
 import { Pressable, Text, View } from 'react-native';
-import BookListComponent from '../components/BookListComponent';
+import BookListComponent from '../../components/BookListComponent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getBook, getBooks, getBooksEXAMPLE } from '../lib/books';
+import { getBook, getBooks, getBooksEXAMPLE } from '../../lib/books';
 import React from 'react';
 
 export default function Tests() {
