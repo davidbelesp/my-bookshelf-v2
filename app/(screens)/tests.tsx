@@ -1,7 +1,7 @@
 import { Pressable, Text, View } from 'react-native';
 import BookListComponent from '../../components/BookListComponent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { getBook, getBooks, getBooksEXAMPLE } from '../../lib/books';
+import { deleteBooks, getBooksEXAMPLE, saveBook, saveBooks, getBookByUUID } from '../../lib/booksManager';
 import React from 'react';
 
 export default function Tests() {
@@ -18,9 +18,9 @@ export default function Tests() {
             <Pressable style={buttonStyle} onPress={
                 async () => {
                     const books = getBooksEXAMPLE()
+                    console.log(books)
+                    await saveBook(books[0])
 
-                    await AsyncStorage.setItem("books", JSON.stringify(books));
-                    console.log(books);
                 }
             }>
                 <Text style={{color:"#fff"}}>Save</Text>
@@ -28,26 +28,24 @@ export default function Tests() {
 
             <Pressable style={buttonStyle} onPress={
                 () => {
-                    getBooks().then((value) => console.log(value));
-                    console.log("read button pressed");
+                    
                 }
             }>
                 <Text style={{color:"#fff"}}>Read</Text>
             </Pressable>
 
             <Pressable style={buttonStyle} onPress={
-                () => {
-                    getBook("1").then((value) => console.log(value));
-                    console.log("read button pressed");
+                async () => {
+                    const book = await getBookByUUID("1")
+                    console.log(book)
                 }
             }>
                 <Text style={{color:"#fff"}}>getuuid 1</Text>
             </Pressable>
 
             <Pressable style={buttonStyle} onPress={
-                () => {
-                    AsyncStorage.removeItem("books");
-                    console.log("Books deleted");
+                async () => {
+                    await deleteBooks()
                 }
             }>
                 <Text style={{color:"#fff"}}>Delete</Text>

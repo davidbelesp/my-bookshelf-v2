@@ -35,7 +35,7 @@ export function getBooksEXAMPLE() : BookModel[] {
             "chapter": 150,
             "volume": 1,
             "nsfw": false,
-            "type": "manga",
+            "type": "Manga",
             "comments": [
                 "I love this book",
                 "It's a must-read"
@@ -51,7 +51,7 @@ export function getBooksEXAMPLE() : BookModel[] {
             "chapter": 12,
             "volume": 1,
             "nsfw": false,
-            "type": "manhwa",
+            "type": "Manhwa",
             "comments": [
                 "I love this book",
                 "It's a must-read"

@@ -10,7 +10,7 @@ export function getStates() : string[] {
     return Object.values(States);
 }
 
-export function getStatesDropdown() {
+export function getStatesDropdown() : {value: string, label: string}[] {
 
     return getStates().map(state => {
         return {
