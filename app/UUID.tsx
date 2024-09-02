@@ -4,9 +4,7 @@ import { Text, View, Image, StyleSheet, TextInput, Pressable, Switch } from "rea
 import { getBook, getBooks } from "../lib/books";
 import { BookModel } from "../Models/Book";
 import colors from "../constants/colors";
-import { SelectList } from 'react-native-dropdown-select-list'
 import RNPickerSelect from 'react-native-picker-select';
-import DropDownPicker from "react-native-dropdown-picker";
 
 import { getStates, getStatesDropdown } from "../Models/States";
 import { styled } from "nativewind";
