@@ -26,6 +26,30 @@ export async function createTable(db : SQLite.SQLiteDatabase) {
     );
 }
 
+export async function updateBook(book : BookModel) {
+    const db = await getConnection();
+    const statement = await db.prepareAsync(
+        `UPDATE books SET title = $title, state = $state, score = $score, chapter = $chapter, volume = $volume, nsfw = $nsfw, type = $type, comments = $comments, image = $image, lastRead = $lastRead WHERE uuid = $uuid`
+    );
+    try {
+        let result = await statement.executeAsync({
+            $uuid: book.uuid,
+            $title: book.title,
+            $state: book.state, 
+            $score: book.score,
+            $chapter: book.chapter, 
+            $volume: book.volume, 
+            $nsfw: book.nsfw ? 1 : 0, 
+            $type: book.type, 
+            $comments: JSON.stringify(book.comments), 
+            $image: book.image, 
+            $lastRead: book.lastRead
+        });
+    } finally {
+        await statement.finalizeAsync();
+    }
+}
+
 export async function insertBook(book : BookModel) {
     let lastId = await getLastID() as {uuid: string};
     if (!lastId) {

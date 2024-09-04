@@ -4,6 +4,7 @@ import { BookModel } from '../Models/Book';
 import colors from '../constants/colors';
 import { Link } from 'expo-router';
 import { styled } from 'nativewind';
+import { CONSTANTS } from '../hooks/Constants';
 
 const StyledPressable = styled(Pressable);
 
@@ -15,7 +16,7 @@ export default function Book({ book }: { book: BookModel }) {
             <StyledPressable>
                 <View className="flex-1 flex-row " style={{backgroundColor:colors.mainCard}}>
                     <Image
-                    source={{ uri: book.image }}
+                    source={{ uri: book.image ? book.image : CONSTANTS.IMAGE_PLACEHOLDER }}
                     style={{ width: 100, height: 130, backgroundColor: colors.text.color }}
                     />
 

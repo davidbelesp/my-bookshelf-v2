@@ -8,7 +8,9 @@ import RNPickerSelect from 'react-native-picker-select';
 import { getStates, getStatesDropdown } from "../Models/States";
 import { styled } from "nativewind";
 import { getTypesDropdown } from "../Models/Types";
-import { getBookByUuid } from "../lib/booksManager";
+import { getBookByUuid, saveBooks, updateBook } from "../lib/booksManager";
+import { AddIcon } from "../components/Icons";
+import { CONSTANTS } from "../hooks/Constants";
 
 export default function BookDeatils() {
     const uuid = getUUID();
@@ -18,8 +20,12 @@ export default function BookDeatils() {
         getBookByUuid(uuid).then((book) => {
             setBooks(book as BookModel)
             console.log('ENTERING WITH BOOK', book);
+
+            setData(book);
         });
     }, []);
+
+    const [image, setImage] = useState(CONSTANTS.IMAGE_PLACEHOLDER);
 
     const [chapter, setChapter] = useState("");
     const [volume, setVolume] = useState("");
@@ -47,11 +53,13 @@ export default function BookDeatils() {
     return (
         <View className="flex-auto flex-col p-6 justify-start items-center gap-4" style={{backgroundColor:colors.mainBackground}}>
 
-            <View className="flex flex-row justify-between items-center w-full" style={{backgroundColor:colors.text.color}}>
-                <Image
-                    source={{ uri: book?.image }}
-                    style={{ width: 120, height: 170, backgroundColor: colors.text.color }}
-                />
+            <View className="flex flex-row justify-between items-center w-full" style={styles.formBox}>
+                <Pressable >
+                    <Image
+                        source={{ uri: image }}
+                        style={{ width: 120, height: 170, backgroundColor: colors.text.color, borderRadius: 3 }}
+                    />
+                </Pressable>
                 <View className="flex-shrink flex-col pl-4 w-4/5">
                     <View className="flex-shrink justify-center items-center">
                         <Text className="mb-2 font-bold" style={{color:colors.extra.white}}>State</Text>
@@ -83,6 +91,7 @@ export default function BookDeatils() {
                     style={styles.input}
                     onChangeText={setTitle}
                     value={title}
+                    placeholder="Set title"
                 />
             </View>
 
@@ -96,7 +105,7 @@ export default function BookDeatils() {
                         style={styles.input}
                         onChangeText={ setChapter }
                         value={chapter}
-                        placeholder="tetas"
+                        placeholder="Set chapters read"
                         keyboardType="numeric"
                     />
                 </View>
@@ -109,7 +118,7 @@ export default function BookDeatils() {
                         style={styles.input}
                         onChangeText={ setVolume }
                         value={volume}
-                        placeholder="tetas"
+                        placeholder="Set volumes read"
                         keyboardType="numeric"
                     />
 
@@ -148,17 +157,55 @@ export default function BookDeatils() {
                 </View>
                 <TextInput
                     style={styles.input}
-                    onChangeText={setTitle}
-                    value={title}
+                    onChangeText={setComments}
+                    value={comments}
                 />
             </View>
 
-            <Pressable style={styles.button}>
-                <Text style={{color:colors.extra.white}}>Save</Text>
+            <Pressable style={styles.button}
+                className="flex justify-center items-center"
+                onPress={() => {saveBook()}} >
+                <AddIcon color={colors.extra.white} />
             </Pressable>
 
         </View>
     );
+
+    function setData(book: BookModel | null) {
+        setState(itemsState.find((item) => item.value === book?.state)?.value || "");
+        setImage(book?.image || CONSTANTS.IMAGE_PLACEHOLDER);
+        setScore(book?.score.toString() || "");
+        setTitle(book?.title || "");
+        setChapter(book?.chapter.toString() || "0");
+        setVolume(book?.volume.toString() || "0");
+        setNsfwEnabled(book?.nsfw || false);
+        setType(itemsType.find((item) => item.value === book?.type)?.value || "");
+        if (book?.comments && book?.comments.toString() !== "") {
+            setComments(book.comments.toString()
+            .replace(/,/g, ", ")
+            .replace(/"/g, "")
+            .replace("[", "")   
+            .replace("]", ""));
+        }
+
+    }    
+
+    function saveBook(){
+        const book = {
+            uuid: uuid,
+            title: title,
+            state: state,
+            score: parseInt(score),
+            chapter: parseInt(chapter),
+            volume: parseInt(volume),
+            nsfw: nsfwEnabled,
+            type: type,
+            comments: comments.split(", "),
+            image: image,
+            lastRead: Date.now(),
+        } as BookModel;
+        updateBook(book);
+    }
 
 }
 
@@ -203,15 +250,19 @@ const styles = StyleSheet.create({
         elevation: 0,
         zIndex: 0,
         backgroundColor: colors.text.color,
-        borderRadius: 8,
+        borderRadius: 5,
         padding: 8,
     },
     button: {
-        backgroundColor: colors.extra.white,
+        backgroundColor: colors.text.color,
         position: "absolute",
-        bottom: 0,
-        right: 0,
-    }
+        bottom: "3%",
+        right: "6%",
+        width: "17%",
+        aspectRatio: 1,
+        padding: 8,
+        borderRadius: 9999,
+    },
 
 });
 
@@ -219,3 +270,4 @@ function getUUID() : string {
     const { uuid } = useLocalSearchParams();
     return uuid? uuid as string : "";
 }
+

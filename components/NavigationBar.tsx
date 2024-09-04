@@ -1,4 +1,4 @@
-import { Stack, Navigator, Tabs } from "expo-router";
+import { Tabs } from "expo-router";
 import React from "react";
 // REACT NATIVE NAVIGATION BAR
 
