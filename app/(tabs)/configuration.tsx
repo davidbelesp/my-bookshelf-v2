@@ -3,8 +3,8 @@ import React from 'react'
 
 const Configuration = () => {
   return (
-    <View>
-      <Text>C</Text>
+    <View className="flex-1 justify-center items-center">
+        <Text className="text-4xl">Configuration</Text>
     </View>
   )
 }

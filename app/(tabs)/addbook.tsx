@@ -3,9 +3,9 @@ import React from 'react'
 
 const AddBook = () => {
   return (
-    <View>
-      <Text>addbook</Text>
-    </View>
+    <View className="flex-1 justify-center items-center">
+            <Text className="text-4xl">Add Book</Text>
+        </View>
   )
 }
 

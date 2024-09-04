@@ -2,18 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { StyleSheet, Text, View, Image, ScrollView, FlatList } from 'react-native';
 import { Link } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { getBooks } from "../lib/books";
+
 import Book from './BookComponent';
 import { BookModel } from '../Models/Book';
 import colors from '../constants/colors';
+import { getBooks } from '../lib/booksManager';
 
 
 export default function BookListComponent() {
 
     const [books, setBooks] = useState<BookModel[]>([]);
     useEffect(() => {
-        getBooks().then((data) => setBooks(data));
-    });
+        getBooks().then((books) => setBooks(books));
+    }, []);
 
     return(
       <View className="" style={{backgroundColor:colors.mainBackground}}>

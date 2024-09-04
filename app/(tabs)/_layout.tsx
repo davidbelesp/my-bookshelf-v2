@@ -5,6 +5,7 @@ import { View, Text } from "react-native";
 import { AddIcon, BooksIcon, ConfigIcon, HomeIcon, InfoIcon, StatsIcon } from "../../components/Icons";
 import Books from "./books";
 import colors from "../../constants/colors";
+import { StatusBar } from "expo-status-bar";
 
 export default function TabsLayout() {
     return (
@@ -31,6 +32,7 @@ export default function TabsLayout() {
                 }} />
                 
             </Tabs>
+            <StatusBar style="light" />
         </View>
     );
 }

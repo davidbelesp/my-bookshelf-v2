@@ -3,8 +3,8 @@ import React from 'react'
 
 const Stats = () => {
   return (
-    <View>
-      <Text>stats</Text>
+    <View className="flex-1 justify-center items-center">
+        <Text className="text-4xl">Stats</Text>
     </View>
   )
 }

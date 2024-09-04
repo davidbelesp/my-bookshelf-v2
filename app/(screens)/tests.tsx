@@ -1,10 +1,18 @@
-import { Pressable, Text, View } from 'react-native';
+import { Pressable, Text, TextInput, View } from 'react-native';
 import BookListComponent from '../../components/BookListComponent';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { deleteBooks, getBooksEXAMPLE, saveBook, saveBooks, getBookByUUID } from '../../lib/booksManager';
-import React from 'react';
+import React, { useEffect } from 'react';
+import { deleteBooks, getBookByUuid, getBooks, getBooksEXAMPLE, getLastID, insertBook } from '../../lib/booksManager';
+
 
 export default function Tests() {
+
+    const [ id , setId ] = React.useState(1);
+
+    useEffect(() => {
+      
+
+    }, []);
 
     const buttonStyle = {
         borderRadius: 10,
@@ -17,39 +25,51 @@ export default function Tests() {
             
             <Pressable style={buttonStyle} onPress={
                 async () => {
-                    const books = getBooksEXAMPLE()
-                    console.log(books)
-                    await saveBook(books[0])
-
+                    const book = getBooksEXAMPLE()[0];
+                    insertBook(book);
                 }
             }>
-                <Text style={{color:"#fff"}}>Save</Text>
-            </Pressable>
-
-            <Pressable style={buttonStyle} onPress={
-                () => {
-                    
-                }
-            }>
-                <Text style={{color:"#fff"}}>Read</Text>
+                <Text style={{color:"#fff"}}>SAVE RANDOM BOOK</Text>
             </Pressable>
 
             <Pressable style={buttonStyle} onPress={
                 async () => {
-                    const book = await getBookByUUID("1")
-                    console.log(book)
+                    const id = await getLastID();
+                    console.log(id);
                 }
             }>
-                <Text style={{color:"#fff"}}>getuuid 1</Text>
+                <Text style={{color:"#fff"}}>GET LAST ID</Text>
             </Pressable>
 
             <Pressable style={buttonStyle} onPress={
                 async () => {
-                    await deleteBooks()
+                    const idR = id ? id.toString() : "1";
+                    const book = await getBookByUuid(idR);
+                    console.log(book);
                 }
             }>
-                <Text style={{color:"#fff"}}>Delete</Text>
+                <Text style={{color:"#fff"}}>GET BOOK WITH ID</Text>
             </Pressable>
+
+            <Pressable style={buttonStyle} onPress={
+                async () => {  
+                    await deleteBooks();
+                }
+            }>
+                <Text style={{color:"#fff"}}>DELETE ALL BOOKS</Text>
+            </Pressable>
+
+            <Pressable style={buttonStyle} onPress={
+                async () => {  
+                    await getBooks();
+                }
+            }>
+                <Text style={{color:"#fff"}}>GET ALL BOOKS</Text>
+            </Pressable>
+
+            <TextInput
+                style={{backgroundColor: "#fff", padding: 10}}
+                onChange={(e) => setId(Number(e.nativeEvent.text))} />
 
         </View>
     );

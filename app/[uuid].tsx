@@ -1,7 +1,6 @@
 import { useLocalSearchParams } from "expo-router";
 import React, { useEffect, useState } from "react";
 import { Text, View, Image, StyleSheet, TextInput, Pressable, Switch } from "react-native";
-import { getBook, getBooks } from "../lib/books";
 import { BookModel } from "../Models/Book";
 import colors from "../constants/colors";
 import RNPickerSelect from 'react-native-picker-select';
@@ -9,28 +8,17 @@ import RNPickerSelect from 'react-native-picker-select';
 import { getStates, getStatesDropdown } from "../Models/States";
 import { styled } from "nativewind";
 import { getTypesDropdown } from "../Models/Types";
-
-
+import { getBookByUuid } from "../lib/booksManager";
 
 export default function BookDeatils() {
-    // const uuid = getUUID();
-    const uuid = "1";
-    
+    const uuid = getUUID();
+
     const [book, setBooks] = useState<BookModel>();
     useEffect(() => {
-        getBook(uuid).then(
-            (data) => {
-                setBooks(data);
-                if(data){
-                    setTitle(data.title);
-                    setState(data.state);
-                    setScore(data.score.toString());
-                    setVolume(data.volume.toString());
-                    setChapter(data.chapter.toString());
-                    setType(data.type);
-                }
-            }
-        );
+        getBookByUuid(uuid).then((book) => {
+            setBooks(book as BookModel)
+            console.log('ENTERING WITH BOOK', book);
+        });
     }, []);
 
     const [chapter, setChapter] = useState("");
@@ -52,7 +40,8 @@ export default function BookDeatils() {
     const [itemsScore] = useState(
         Array.from({ length: 11 }, (_, index) => (index).toString()).map((item) => ({label: item, value: item,}))
     );
-
+    
+    const [comments, setComments] = useState("");
     const [title, setTitle] = useState("");
 
     return (

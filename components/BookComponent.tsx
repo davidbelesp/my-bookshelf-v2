@@ -10,8 +10,8 @@ const StyledPressable = styled(Pressable);
 export default function Book({ book }: { book: BookModel }) {
 
     return(
-        // <Link href={`/${book.uuid}`} asChild className='mb-2'>
-        <Link href={`/UUID`} asChild className='mb-2'>
+        //<Link href={`/UUID`} asChild className='mb-2'>
+        <Link href={`/${book.uuid}`} asChild className='mb-2'>
             <StyledPressable>
                 <View className="flex-1 flex-row " style={{backgroundColor:colors.mainCard}}>
                     <Image
