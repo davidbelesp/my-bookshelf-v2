@@ -1,6 +1,4 @@
 import { Pressable, Text, TextInput, View } from 'react-native';
-import BookListComponent from '../../components/BookListComponent';
-import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, { useEffect } from 'react';
 import { deleteBooks, getBookByUuid, getBooks, getBooksEXAMPLE, getLastID, insertBook } from '../../lib/booksManager';
 

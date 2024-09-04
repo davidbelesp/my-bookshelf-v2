@@ -5,10 +5,10 @@ import { BookModel } from "../Models/Book";
 import colors from "../constants/colors";
 import RNPickerSelect from 'react-native-picker-select';
 
-import { getStates, getStatesDropdown } from "../Models/States";
-import { styled } from "nativewind";
+import { getStatesDropdown } from "../Models/States";
+
 import { getTypesDropdown } from "../Models/Types";
-import { getBookByUuid, saveBooks, updateBook } from "../lib/booksManager";
+import { getBookByUuid, updateBook } from "../lib/booksManager";
 import { AddIcon } from "../components/Icons";
 import { CONSTANTS } from "../hooks/Constants";
 

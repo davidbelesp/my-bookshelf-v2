@@ -1,10 +1,8 @@
 import { Tabs } from "expo-router";
 import React from "react";
-import { View, Text } from "react-native";   
+import { View } from "react-native";   
 
 import { AddIcon, BooksIcon, ConfigIcon, HomeIcon, InfoIcon, StatsIcon } from "../../components/Icons";
-import Books from "./books";
-import colors from "../../constants/colors";
 import { StatusBar } from "expo-status-bar";
 
 export default function TabsLayout() {

@@ -1,4 +1,4 @@
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import BookListComponent from '../../components/BookListComponent';
 import { Link } from 'expo-router';
 import React from 'react';

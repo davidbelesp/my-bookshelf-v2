@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { StyleSheet, Text, View, Image, ScrollView, FlatList, Pressable } from 'react-native';
+import { Text, View, Image, Pressable } from 'react-native';
 import { BookModel } from '../Models/Book';
 import colors from '../constants/colors';
 import { Link } from 'expo-router';

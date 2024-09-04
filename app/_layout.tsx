@@ -1,13 +1,11 @@
 import React from 'react';
-import { Link, Stack, Tabs } from 'expo-router';
-import { View, Text } from 'react-native';
+import { Stack } from 'expo-router';
+import { View } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
 import colors from '../constants/colors';
-import Logo, { ZoomedLogo } from '../components/Logo';
-import TabsLayout from './(tabs)/_layout';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import Books from './(tabs)/books';
-import NavigationBar from '../components/NavigationBar';
+import { ZoomedLogo } from '../components/Logo';
+
 
 
 export default function Layout() {
