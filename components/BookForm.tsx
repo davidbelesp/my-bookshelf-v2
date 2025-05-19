@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   View,
   Text,
   TextInput,
-  Button,
   ScrollView,
   Switch,
   Image,
@@ -17,7 +16,6 @@ import { Picker } from '@react-native-picker/picker';
 import * as ImagePicker from 'expo-image-picker';
 import * as FileSystem from 'expo-file-system';
 import { MaterialIcons } from '@expo/vector-icons';
-import { loadBooks, saveBooks } from 'storage/bookStorage';
 
 type BookFormData = Partial<BookModel> & { deleted?: boolean };
 
@@ -94,7 +92,7 @@ export default function BookForm({ initial = {}, onSubmit, submitLabel = 'Save B
 
   return (
     <View className="flex-1 bg-white relative flex-col">
-      <ScrollView className="flex-1 bg-white p-4">
+      <ScrollView className="flex-1 bg-white p-4 mb-28">
         {/* 📸 Cover Image Picker */}
         <View className="mb-6 items-center">
           <Pressable onPress={handlePickImage}>
