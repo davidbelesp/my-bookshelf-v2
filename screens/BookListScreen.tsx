@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, FlatList, Image } from 'react-native';
+import { View, Text, FlatList, Image, Pressable } from 'react-native';
 import { loadBooks } from '../storage/bookStorage';
 import { BookModel } from '../models/BookModel';
+import { useNavigation } from '@react-navigation/native';
 
 export default function BookListScreen() {
   const [books, setBooks] = useState<BookModel[]>([]);
+  const navigation = useNavigation<any>();
 
   useEffect(() => {
     const fetchBooks = async () => {
@@ -34,17 +36,24 @@ export default function BookListScreen() {
   );
 
   return (
-    <View className="flex-1 bg-gray-100 p-4">
-      {books.length === 0 ? (
-        <Text className="text-center text-gray-500 mt-10">No books yet.</Text>
-      ) : (
-        <FlatList
-          data={books}
-          keyExtractor={(item) => item.uuid}
-          renderItem={renderItem}
-        />
-      )}
+    <View className="flex-1 bg-gray-100">
+      <FlatList
+        contentContainerStyle={{ padding: 16 }}
+        data={books}
+        keyExtractor={(item) => item.uuid}
+        renderItem={renderItem}
+        ListEmptyComponent={
+          <Text className="text-center text-gray-500 mt-10">No books yet.</Text>
+        }
+      />
+
+      {/* Floating Action Button */}
+      <Pressable
+        className="absolute bottom-6 right-6 bg-blue-600 rounded-full w-14 h-14 items-center justify-center shadow-lg"
+        onPress={() => navigation.navigate('AddBook')}
+      >
+        <Text className="text-white text-3xl leading-none">＋</Text>
+      </Pressable>
     </View>
   );
-  
 }
