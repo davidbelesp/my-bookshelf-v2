@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 import { View, Text, FlatList, Image, Pressable } from 'react-native';
 import { loadBooks } from '../storage/bookStorage';
 import { BookModel } from '../models/BookModel';
 import { useNavigation } from '@react-navigation/native';
 import { useFocusEffect } from '@react-navigation/native';
+import { stateColorClass } from 'models/State';
 
 export default function BookListScreen() {
   const [books, setBooks] = useState<BookModel[]>([]);
@@ -23,24 +24,45 @@ export default function BookListScreen() {
   const renderItem = ({ item }: { item: BookModel }) => (
     <Pressable
       onPress={() => navigation.navigate('EditBook', { uuid: item.uuid })}
-      className="bg-white rounded-xl p-4 mb-3 shadow-md flex-row items-center"
+      className="bg-white mb-3 shadow-md flex-row items-center overflow-hidden rounded"
     >
-      {
+      { /* Image and placeholder */ 
         item.image ? (
           <Image
             source={{ uri: item.image }}
-            className="w-16 h-24 rounded mr-4"
+            className="w-28 h-full mr-4 rounded"
             resizeMode="cover"
           />
         ) : (
-          <View className="w-16 h-24 bg-gray-300 rounded mr-4" />
+          <View className="w-28 h-full bg-gray-300 mr-4 rounded" />
         )
       }
-        <View className="flex-1">
-          <Text className="text-lg font-bold">{item.title}</Text>
-          <Text className="text-sm text-gray-500">{item.state}</Text>
-          <Text className="text-sm text-gray-700">Chapter {item.chapter}</Text>
+
+      { /* Colored State corner */ }
+      <View className={`absolute -top-16 -right-16 w-24 h-24 ${stateColorClass[item.state]} rotate-45`} />
+      
+      { /* Book details */ }
+      <View className="flex-1 p-4 flex-col justify-between items-center">
+        <Text className="text-lg font-bold mb-4">{item.title}</Text>
+        <Text className='text-sm text-gray-500'>{item.type} · {item.state}</Text>
+
+        { /* Separator */}
+        <View className="w-full h-[1px] bg-gray-300 my-2" />
+
+        <View className="flex-row w-full justify-center gap-16">
+          <View className='flex flex-col items-center'>
+            <Text className='text-xl text-mainText font-bold'>{item.chapter}</Text>
+            <Text className='text-lg text-mainText font-bold'>Chapters</Text>
+          </View>
+
+          <View className='flex flex-col items-center'>
+            <Text className='text-xl text-mainText font-bold'>{item.volume}</Text>
+            <Text className='text-lg text-mainText font-bold'>Volumes</Text>
+          </View>
         </View>
+
+      </View>
+
       </Pressable>
   );
 

@@ -28,7 +28,6 @@ export default function RootNavigator() {
           color: colors.mainWhite,
         },
         headerTintColor: colors.mainWhite,
-        headerShadowVisible: !dark,
       }}>
 
       <Stack.Screen
