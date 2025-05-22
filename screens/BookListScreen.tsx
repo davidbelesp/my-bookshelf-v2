@@ -111,6 +111,15 @@ export default function BookListScreen() {
         style={{ zIndex: 10 }}
       />
 
+      {/* Score box */}
+      <View className='absolute left-0 bottom-0 flex h-10 w-10 items-center justify-center rounded-tr bg-mainScore shadow-md'>
+        <Text
+          className="text-center text-base font-bold text-white"
+          style={{ zIndex: 20 }}>
+          {item.score}
+        </Text>
+      </View>
+
       {/* Book details */}
       <View className="flex-1 flex-col items-center justify-between p-4">
         <Text className="mb-4 text-lg font-bold">{item.title}</Text>
