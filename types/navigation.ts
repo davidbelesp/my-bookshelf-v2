@@ -4,4 +4,5 @@ export type RootStackParamList = {
   Settings: undefined;
   AddBook: undefined;
   EditBook: { uuid: string };
+  Statistics: undefined;
 };
