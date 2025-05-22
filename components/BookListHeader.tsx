@@ -1,7 +1,6 @@
 // components/BookListHeader.tsx
-import React from "react";
 import { View, Pressable } from "react-native";
-import { MaterialCommunityIcons, Ionicons } from "@expo/vector-icons";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import SearchBar from "./SearchBar";
 
 type BookListHeaderProps = {

@@ -1,7 +1,6 @@
 import { Modal, Pressable, View, Text, Animated } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SortBy, StateOrAll, TypeOrAll } from 'types/FilterTypes';
-import { useEffect, useRef } from 'react';
 
 type FilterSortModalProps = {
   visible: boolean;

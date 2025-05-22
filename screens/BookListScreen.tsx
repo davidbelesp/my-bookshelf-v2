@@ -1,5 +1,5 @@
 import { useState, useCallback, useLayoutEffect, useEffect } from 'react';
-import { View, Text, FlatList, Image, Pressable, Modal } from 'react-native';
+import { View, Text, FlatList, Image, Pressable } from 'react-native';
 import { loadBooks } from '../storage/bookStorage';
 import { BookModel } from '../models/BookModel';
 import { useNavigation } from '@react-navigation/native';

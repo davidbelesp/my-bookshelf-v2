@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { View, Text, ScrollView } from 'react-native';
 import { loadBooks } from '../storage/bookStorage';
 import { BookModel } from '../models/BookModel';
 import { Type } from 'models/Type';
-import { State } from 'react-native-gesture-handler';
 
 export default function StatisticsScreen() {
   const [books, setBooks] = useState<BookModel[]>([]);
