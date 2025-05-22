@@ -11,6 +11,7 @@ export default function SettingsScreen() {
     darkMode: false,
     showNSFW: false,
     backupEnabled: false,
+    censorNSFW: false,
   });
   const [tab, setTab] = useState<'config' | 'db'>('config');
 
@@ -60,6 +61,14 @@ export default function SettingsScreen() {
               <Switch
                 value={settings.showNSFW}
                 onValueChange={(v) => updateSetting('showNSFW', v)}
+              />
+            </View>
+
+            <View className="mb-4 flex-row items-center justify-between">
+              <Text className="text-base">Censor NSFW</Text>
+              <Switch
+                value={settings.censorNSFW}
+                onValueChange={(v) => updateSetting('censorNSFW', v)}
               />
             </View>
           </>

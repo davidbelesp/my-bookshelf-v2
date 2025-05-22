@@ -1,18 +1,62 @@
-import { useState, useCallback, useLayoutEffect } from 'react';
-import { View, Text, FlatList, Image, Pressable } from 'react-native';
+import { useState, useCallback, useLayoutEffect, useEffect } from 'react';
+import { View, Text, FlatList, Image, Pressable, Modal } from 'react-native';
 import { loadBooks } from '../storage/bookStorage';
 import { BookModel } from '../models/BookModel';
 import { useNavigation } from '@react-navigation/native';
 import { useFocusEffect } from '@react-navigation/native';
-import { stateColorClass } from 'models/State';
+import { State, stateColorClass } from 'models/State';
 import { useTheme } from '../theme/ThemeContext';
 import BookListHeader from 'components/BookListHeader';
+import { Type } from 'models/Type';
+import { SortBy, StateOrAll, TypeOrAll } from 'types/FilterTypes';
+import FilterSortModal from 'components/FilterSortModal';
+import { Settings } from 'models/Settings';
+import { loadSettings } from 'storage/settingsStorage';
+import { filterBooks } from 'utils/filterBooks';
 
 export default function BookListScreen() {
   const [books, setBooks] = useState<BookModel[]>([]);
-  const [search, setSearch] = useState<string>('');
   const navigation = useNavigation<any>();
   const { colors } = useTheme();
+
+  const [settings, setSettings] = useState<Settings | null>(null);
+
+  const [stateFilter, setStateFilter] = useState<StateOrAll>('All');
+  const [typeFilter, setTypeFilter] = useState<TypeOrAll>('All');
+  const [sortBy, setSortBy] = useState<SortBy>('title');
+  const [search, setSearch] = useState<string>('');
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const allStates: StateOrAll[] = ['All', ...Object.values(State)];
+  const allTypes: TypeOrAll[] = ['All', ...Object.values(Type)];
+
+  const sortOptions: { label: string; value: SortBy }[] = [
+    { label: 'Title (A-Z)', value: 'title' },
+    { label: 'Chapters (desc)', value: 'chapter' },
+    { label: 'Last Read (desc)', value: 'lastRead' },
+  ];
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerTitle: () => (
+        <BookListHeader
+          value={search}
+          onChange={setSearch}
+          onMenu1={() => navigation.navigate('Statistics')}
+          onMenu2={() => setModalVisible(true)}
+        />
+      ),
+      headerTitleAlign: 'center',
+      headerStyle: { backgroundColor: colors.main },
+    });
+  }, [navigation, search]);
+
+  useEffect(() => {
+    (async () => {
+      const loadedSettings = await loadSettings();
+      setSettings(loadedSettings);
+    })();
+  }, []);
 
   useFocusEffect(
     useCallback(() => {
@@ -25,50 +69,45 @@ export default function BookListScreen() {
     }, [])
   );
 
-  const filteredBooks = books.filter(
-    (b) =>
-      b.title.toLowerCase().includes(search.toLowerCase()) ||
-      b.type.toLowerCase().includes(search.toLowerCase()) ||
-      b.state.toLowerCase().includes(search.toLowerCase())
-  );
-
-  useLayoutEffect(() => {
-    navigation.setOptions({
-      headerTitle: () => (
-        <BookListHeader
-          value={search}
-          onChange={setSearch}
-          onMenu1={() => {
-            navigation.navigate('Statistics');
-          }}
-          onMenu2={() => alert('Menu 2 pressed')}
-        />
-      ),
-      headerTitleAlign: 'center',
-      headerStyle: { backgroundColor: colors.main },
-    });
-  }, [navigation, search]);
+  const filteredBooks = filterBooks({
+    books,
+    search,
+    settings,
+    stateFilter,
+    typeFilter,
+    sortBy,
+  });
 
   const renderItem = ({ item }: { item: BookModel }) => (
     <Pressable
       onPress={() => navigation.navigate('EditBook', { uuid: item.uuid })}
-      className="relative mb-3 flex-row items-center rounded bg-white shadow-md">
+      className="relative mb-3 flex-row items-center overflow-hidden rounded bg-white shadow-md">
       {
         /* Image and placeholder */
-        item.image ? (
+        settings?.censorNSFW && item.nsfw ? (
+          <Image
+            source={require('../assets/cover_nsfw.png')}
+            className="mr-4 h-full w-28 rounded"
+            resizeMode="cover"
+          />
+        ) : item.image ? (
           <Image
             source={{ uri: item.image }}
             className="mr-4 h-full w-28 rounded"
             resizeMode="cover"
           />
         ) : (
-          <View className="mr-4 h-full w-28 rounded bg-gray-300" />
+          <Image
+            source={require('../assets/cover_null.png')}
+            className="mr-4 h-full w-28 rounded"
+            resizeMode="cover"
+          />
         )
       }
 
       {/* Colored State corner */}
       <View
-        className={`h-24 w-24 -top-16 -right-16 ${stateColorClass[item.state]} rotate-45`}
+        className={`absolute -right-16 -top-16 h-24 w-24 ${stateColorClass[item.state]} rotate-45`}
         style={{ zIndex: 10 }}
       />
 
@@ -109,10 +148,24 @@ export default function BookListScreen() {
 
       {/* Floating Action Button */}
       <Pressable
-        className="absolute bottom-10 right-10 h-14 w-14 items-center justify-center rounded-full bg-main shadow-lg"
+        className="bg-main absolute bottom-10 right-10 h-14 w-14 items-center justify-center rounded-full shadow-lg"
         onPress={() => navigation.navigate('AddBook')}>
         <Text className="text-3xl leading-none text-white">＋</Text>
       </Pressable>
+
+      <FilterSortModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        allStates={allStates}
+        stateFilter={stateFilter}
+        setStateFilter={setStateFilter}
+        allTypes={allTypes}
+        typeFilter={typeFilter}
+        setTypeFilter={setTypeFilter}
+        sortOptions={sortOptions}
+        sortBy={sortBy}
+        setSortBy={setSortBy}
+      />
     </View>
   );
 }

@@ -70,8 +70,8 @@ export default function BookForm({ initial = {}, onSubmit, submitLabel = 'Save B
           to: newPath,
         });
         finalImageUri = newPath;
-      } catch (err: any) {
-        Alert.alert('Error saving image', err.message);
+      } catch (ignored: any) {
+        //console.error('Error copying image:', ignored);
       }
     }
 

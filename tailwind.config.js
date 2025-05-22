@@ -11,7 +11,13 @@ module.exports = {
     './screens/**/*.{js,ts,tsx}',
     './src/**/*.{js,ts,tsx}',
   ],
-
+  safelist: [
+    "bg-completed",
+    "bg-reading",
+    "bg-onhold",
+    "bg-dropped",
+    "bg-plantoread",
+  ],
   presets: [require('nativewind/preset')],
   theme: {
     extend: {

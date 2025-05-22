@@ -10,6 +10,7 @@ export const loadSettings = async (): Promise<Settings> => {
     darkMode: false,
     showNSFW: false,
     backupEnabled: false,
+    censorNSFW: false,
   };
 };
 

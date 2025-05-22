@@ -1,5 +1,4 @@
 // components/HomeHeader.tsx
-import React from "react";
 import { View, Pressable, Text } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 
