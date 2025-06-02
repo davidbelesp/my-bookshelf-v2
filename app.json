@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "My Bookshelf",
-    "slug": "My Bookshelf",
+    "slug": "MyBookshelfV2",
     "version": "1.0.0",
     "web": {
       "favicon": "./assets/favicon.png"

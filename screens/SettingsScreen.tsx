@@ -63,18 +63,18 @@ export default function SettingsScreen() {
   };
 
   return (
-    <View className="flex-1 p-4">
+    <View className={`flex-1 p-4 ${dark ? 'bg-dark_mainCard' : 'bg-mainScreenBg'}`}>
       {/* Tabs */}
       <View className="mb-4 flex-row border-b border-gray-300">
         <Pressable
           onPress={() => setTab('config')}
-          className={`px-4 py-2 ${tab === 'config' ? 'border-b-2 border-blue-600' : ''}`}>
-          <Text className="font-semibold">Config</Text>
+          className={`px-4 py-2 ${tab === 'config' ? dark ? 'border-b-2 border-mainScore' : 'border-b-2 border-dark_main' : ''}`}>
+          <Text className={`font-semibold ${dark ? 'text-white' : 'text-black'}`}>Config</Text>
         </Pressable>
         <Pressable
           onPress={() => setTab('db')}
-          className={`px-4 py-2 ${tab === 'db' ? 'border-b-2 border-blue-600' : ''}`}>
-          <Text className="font-semibold">DB</Text>
+          className={`px-4 py-2 ${tab === 'db' ? dark ? 'border-b-2 border-mainScore' : 'border-b-2 border-dark_main' : ''}`}>
+          <Text className={`font-semibold ${dark ? 'text-white' : 'text-black'}`}>DB</Text>
         </Pressable>
       </View>
 
@@ -83,7 +83,7 @@ export default function SettingsScreen() {
         {tab === 'config' && (
           <>
             <View className="mb-4 flex-row items-center justify-between">
-              <Text className="text-base">Dark Mode</Text>
+              <Text className={`text-base ${dark ? 'text-white' : 'text-black'}`}>Dark Mode</Text>
               <Switch
                 value={dark}
                 onValueChange={(v) => {
@@ -94,7 +94,7 @@ export default function SettingsScreen() {
             </View>
 
             <View className="mb-4 flex-row items-center justify-between">
-              <Text className="text-base">Show NSFW</Text>
+              <Text className={`text-base ${dark ? 'text-white' : 'text-black'}`}>Show NSFW</Text>
               <Switch
                 value={settings.showNSFW}
                 onValueChange={(v) => updateSetting('showNSFW', v)}
@@ -102,7 +102,7 @@ export default function SettingsScreen() {
             </View>
 
             <View className="mb-4 flex-row items-center justify-between">
-              <Text className="text-base">Censor NSFW</Text>
+              <Text className={`text-base ${dark ? 'text-white' : 'text-black'}`}>Censor NSFW</Text>
               <Switch
                 value={settings.censorNSFW}
                 onValueChange={(v) => updateSetting('censorNSFW', v)}
@@ -114,17 +114,37 @@ export default function SettingsScreen() {
         {tab === 'db' && (
           <>
             <View className="mb-4 flex-row items-center justify-between">
-              <Text className="text-base">Enable Backup</Text>
+              <Text className={`text-base ${dark ? 'text-white' : 'text-black'}`}>Enable Backup</Text>
               <Switch
                 value={settings.backupEnabled}
                 onValueChange={(v) => updateSetting('backupEnabled', v)}
               />
             </View>
+
+            <View className="mb-4 flex-row items-center justify-between">
+              <Pressable
+                className="rounded bg-red-600 px-4 py-2"
+                onPress={() => {
+                  Alert.alert('Delete all books?', 'This action cannot be undone.', [
+                    { text: 'Cancel', style: 'cancel' },
+                    {
+                      text: 'Delete',
+                      onPress: async () => {
+                        await saveBooks([]);
+                        Alert.alert('Success', 'All books deleted!');
+                      },
+                      style: 'destructive',
+                    },
+                  ]);
+                }}>
+                <Text className="text-center text-white">Delete All Books</Text>
+              </Pressable>
+            </View>
             {/* More DB settings here */}
             <View className="p-4">
-              <Text className="mb-2 font-semibold">Paste exported JSON here:</Text>
+              <Text className={`mb-2 font-semibold ${dark ? 'text-white' : 'text-black'}`}>Paste exported JSON here:</Text>
               <TextInput
-                className="mb-4 h-40 rounded border p-2 text-xs"
+                className={`mb-4 h-40 rounded border p-2 text-xs ${dark ? 'border-white text-black' : 'border-black text-white'}`}
                 multiline
                 value={importText}
                 onChangeText={setImportText}
@@ -132,7 +152,7 @@ export default function SettingsScreen() {
                 autoCorrect={false}
                 autoCapitalize="none"
               />
-              <Pressable className="rounded bg-blue-600 px-4 py-2" onPress={handleImport}>
+              <Pressable className="rounded bg-main px-4 py-2" onPress={handleImport}>
                 <Text className="text-center text-white">Import</Text>
               </Pressable>
             </View>

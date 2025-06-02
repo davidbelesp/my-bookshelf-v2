@@ -13,14 +13,14 @@ import HomeHeader from 'components/HomeHeader';
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
 export default function RootNavigator() {
-  const { colors } = useTheme();
+  const { dark, colors } = useTheme();
 
   return (
     <Stack.Navigator
       id={undefined}
       screenOptions={{
         headerStyle: {
-          backgroundColor: colors.main,
+          backgroundColor: dark ? colors.main : colors.mainDark,
         },
         headerTitleStyle: {
           color: colors.mainWhite,
@@ -32,16 +32,26 @@ export default function RootNavigator() {
         component={HomeScreen}
         options={({ navigation }) => ({
           headerTitle: () => <HomeHeader onConfigPress={() => navigation.navigate('Settings')} />,
-          headerStyle: { backgroundColor: colors.main },
+          headerStyle: { backgroundColor: dark ? colors.main : colors.mainDark },
           headerTitleAlign: 'center',
         })}
       />
 
-      <Stack.Screen name="AddBook" component={AddBookScreen} />
+      <Stack.Screen name="AddBook" component={AddBookScreen} 
+      options={{
+          headerTitleStyle: {
+            color: colors.mainWhite,
+          },
+          title: "Add Book",
+        }}
+      />
       <Stack.Screen
         name="Books"
         component={BookListScreen}
         options={{
+          headerTitleStyle: {
+            color: colors.mainWhite,
+          },
           headerStyle: { backgroundColor: '#2d50a0' },
         }}
       />
@@ -49,11 +59,28 @@ export default function RootNavigator() {
         name="Statistics"
         component={StatisticsScreen}
         options={{
+          headerTitleStyle: {
+            color: colors.mainWhite,
+          },
           title: "Statistics",
         }}
       />
-      <Stack.Screen name="Settings" component={SettingsScreen} />
-      <Stack.Screen name="EditBook" component={EditBookScreen} />
+      <Stack.Screen name="Settings" component={SettingsScreen} 
+      options={{
+          headerTitleStyle: {
+            color: colors.mainWhite,
+          },
+          title: "Settings",
+        }}
+      />
+      <Stack.Screen name="EditBook" component={EditBookScreen} 
+      options={{
+          headerTitleStyle: {
+            color: colors.mainWhite,
+          },
+          title: "Edit Book",
+        }}
+      />
     </Stack.Navigator>
   );
 }

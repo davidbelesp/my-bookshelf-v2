@@ -1,10 +1,13 @@
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { View, Text, Pressable, ImageBackground, Image } from 'react-native';
 import { RootStackParamList } from '../types/navigation';
+import { useTheme } from 'theme/ThemeContext';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Home'>;
 
 export default function HomeScreen({ navigation }: Props) {
+  const { dark } = useTheme();
+
   return (
     <ImageBackground
       source={require('../assets/bg.png')}
@@ -19,7 +22,7 @@ export default function HomeScreen({ navigation }: Props) {
         <View className="mb-20 flex-1 flex-col items-center justify-end">
           <Pressable
             onPress={() => navigation.navigate('Books')}
-            className="items-center rounded-lg bg-main px-10 py-5">
+            className={`items-center rounded-lg ${ dark ? 'bg-main' : 'bg-dark_mainDark'} px-10 py-5`}>
             <Text className="text-base font-bold text-mainWhite">Go to Bookshelf</Text>
           </Pressable>
         </View>

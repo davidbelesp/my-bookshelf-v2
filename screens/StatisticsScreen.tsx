@@ -3,9 +3,11 @@ import { View, Text, ScrollView } from 'react-native';
 import { loadBooks } from '../storage/bookStorage';
 import { BookModel } from '../models/BookModel';
 import { Type } from 'models/Type';
+import { useTheme } from 'theme/ThemeContext';
 
 export default function StatisticsScreen() {
   const [books, setBooks] = useState<BookModel[]>([]);
+  const { dark } = useTheme();
 
   useEffect(() => {
     const fetchBooks = async () => {

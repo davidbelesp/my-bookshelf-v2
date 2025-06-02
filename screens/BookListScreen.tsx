@@ -4,7 +4,7 @@ import { loadBooks } from '../storage/bookStorage';
 import { BookModel } from '../models/BookModel';
 import { useNavigation } from '@react-navigation/native';
 import { useFocusEffect } from '@react-navigation/native';
-import { State, stateColorClass } from 'models/State';
+import { darkStateColorClass, State, stateColorClass } from 'models/State';
 import { useTheme } from '../theme/ThemeContext';
 import BookListHeader from 'components/BookListHeader';
 import { Type } from 'models/Type';
@@ -17,7 +17,7 @@ import { filterBooks } from 'utils/filterBooks';
 export default function BookListScreen() {
   const [books, setBooks] = useState<BookModel[]>([]);
   const navigation = useNavigation<any>();
-  const { colors } = useTheme();
+  const { colors, dark } = useTheme();
 
   const [settings, setSettings] = useState<Settings | null>(null);
 
@@ -47,7 +47,7 @@ export default function BookListScreen() {
         />
       ),
       headerTitleAlign: 'center',
-      headerStyle: { backgroundColor: colors.main },
+      headerStyle: { backgroundColor: dark ? colors.main : colors.mainDark },
     });
   }, [navigation, search]);
 
@@ -81,7 +81,7 @@ export default function BookListScreen() {
   const renderItem = ({ item }: { item: BookModel }) => (
     <Pressable
       onPress={() => navigation.navigate('EditBook', { uuid: item.uuid })}
-      className="relative mb-3 flex-row items-center overflow-hidden rounded bg-white shadow-md">
+      className={`relative mb-3 flex-row items-center overflow-hidden rounded ${dark ? 'bg-dark_mainCard' : 'bg-white'} shadow-md`}>
       {
         /* Image and placeholder */
         settings?.censorNSFW && item.nsfw ? (
@@ -107,23 +107,23 @@ export default function BookListScreen() {
 
       {/* Colored State corner */}
       <View
-        className={`absolute -right-16 -top-16 h-24 w-24 ${stateColorClass[item.state]} rotate-45`}
+        className={`absolute -right-16 -top-16 h-24 w-24 ${dark ? darkStateColorClass[item.state] : stateColorClass[item.state]} rotate-45`}
         style={{ zIndex: 10 }}
       />
 
       {/* Score box */}
-      <View className='absolute left-0 bottom-0 flex h-10 w-10 items-center justify-center rounded-tr bg-mainScore shadow-md'>
+      <View className={`absolute left-0 bottom-0 flex h-10 w-10 items-center justify-center rounded-tr ${dark ? 'bg-mainScore' : 'bg-dark_mainScore'} shadow-md`}>
         <Text
-          className="text-center text-base font-bold text-white"
+          className={`text-center text-base font-bold ${dark ? 'text-white' : 'text-black'}`}
           style={{ zIndex: 20 }}>
           {item.score}
         </Text>
       </View>
 
       {/* Book details */}
-      <View className="flex-1 flex-col items-center justify-between p-4">
-        <Text className="mb-4 text-lg font-bold">{item.title}</Text>
-        <Text className="text-sm text-gray-500">
+      <View className={`flex-1 flex-col items-center justify-between p-4`}>
+        <Text className={`mb-4 text-lg font-bold ${dark ? 'text-white' : 'text-black'}`}>{item.title}</Text>
+        <Text className={`text-sm ${dark ? 'text-gray-300' : 'text-gray-600'}`}>
           {item.type} · {item.state}
         </Text>
 
@@ -132,13 +132,13 @@ export default function BookListScreen() {
 
         <View className="w-full flex-row justify-center gap-16">
           <View className="flex flex-col items-center">
-            <Text className="text-mainText text-xl font-bold">{item.chapter}</Text>
-            <Text className="text-mainText text-lg font-bold">Chapters</Text>
+            <Text className={`${dark ? 'text-mainText' : 'text-dark_mainText'} text-xl font-bold`}>{item.chapter}</Text>
+            <Text className={`${dark ? 'text-mainText' : 'text-dark_mainText'} text-lg font-bold`}>Chapters</Text>
           </View>
 
           <View className="flex flex-col items-center">
-            <Text className="text-mainText text-xl font-bold">{item.volume}</Text>
-            <Text className="text-mainText text-lg font-bold">Volumes</Text>
+            <Text className={`${dark ? 'text-mainText' : 'text-dark_mainText'} text-xl font-bold`}>{item.volume}</Text>
+            <Text className={`${dark ? 'text-mainText' : 'text-dark_mainText'} text-lg font-bold`}>Volumes</Text>
           </View>
         </View>
       </View>
@@ -146,7 +146,7 @@ export default function BookListScreen() {
   );
 
   return (
-    <View className="flex-1 bg-gray-100">
+    <View className={`flex-1 ${dark ? 'bg-dark_mainScreenBg' : 'bg-mainScreenBg'}`}>
       <FlatList
         contentContainerStyle={{ padding: 16 }}
         data={filteredBooks}
@@ -157,7 +157,7 @@ export default function BookListScreen() {
 
       {/* Floating Action Button */}
       <Pressable
-        className="bg-main absolute bottom-10 right-10 h-14 w-14 items-center justify-center rounded-full shadow-lg"
+        className={`${ dark ? "bg-main" : "bg-dark_mainDark"} absolute bottom-10 right-10 h-14 w-14 items-center justify-center rounded-full shadow-lg`}
         onPress={() => navigation.navigate('AddBook')}>
         <Text className="text-3xl leading-none text-white">＋</Text>
       </Pressable>

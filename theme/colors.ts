@@ -1,11 +1,20 @@
-export const darkTheme = {
-  main: '#ffffff',
+export const lightTheme = {
+  main: '#FFB4CA',
   mainDark: '#fe6290',
   mainScore: '#FFB4CA',
   mainText: '#fe8cae',
 
+  mainScreenBg: '#f5f5f5',
+
   mainWhite: '#ffffff',
   mainBlack: '#000000',
+  mainGray: '#3a3a3a',
+  mainCard: '#f5f5f5',
+
+  inputLabel: '#000',
+  inputBorder: '#d1d1d1',
+  inputMain: '#f5f5f5',
+  inputText: '#3a3a3a',
 
   completed: '#F78DFF',
   reading: '#76FF83',
@@ -14,14 +23,23 @@ export const darkTheme = {
   plantoread: '#FFc3c3c3',
 };
 
-export const lightTheme = {
+export const darkTheme = {
   main: '#2d50a0',
   mainDark: '#214694',
   mainScore: '#30A3CF',
   mainText: '#30A3CF',
 
+  mainScreenBg: '#3a3a3a',
+
   mainWhite: '#ffffff',
   mainBlack: '#000000',
+  mainGray: '#3a3a3a',
+  mainCard: '#f5f5f5',
+
+  inputLabel: '#000',
+  inputBorder: '#d1d1d1',
+  inputMain: '#f5f5f5',
+  inputText: '#3a3a3a',
 
   completed: '#26448f',
   reading: '#2db039',
